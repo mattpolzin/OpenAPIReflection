@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "OpenAPIKit",
+        "repositoryURL": "https://github.com/mattpolzin/OpenAPIKit.git",
+        "state": {
+          "branch": null,
+          "revision": "7386355f3c31a4094f528e0f650947ceb90b2cd7",
+          "version": "0.23.0"
+        }
+      },
+      {
         "package": "OrderedDictionary",
         "repositoryURL": "https://github.com/mattpolzin/OrderedDictionary.git",
         "state": {

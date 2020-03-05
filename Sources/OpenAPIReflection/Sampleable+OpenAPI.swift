@@ -57,7 +57,7 @@ public func genericOpenAPISchemaGuess<T>(for value: T, using encoder: JSONEncode
     }
 
     if properties.count != mirror.children.count {
-        throw OpenAPITypeError.unknownNodeType(type(of: value))
+        throw OpenAPI.TypeError.unknownNodeType(type(of: value))
     }
 
     // There should not be any duplication of keys since these are
@@ -76,7 +76,7 @@ internal func reencodedSchemaGuess<T: Encodable>(for value: T, using encoder: JS
 
     guard let wrapperDict = wrappedValue as? [String: Any],
         wrapperDict.contains(where: { $0.key == "primitive" }) else {
-            throw OpenAPICodableError.primitiveGuessFailed
+            throw OpenAPI.EncodableError.primitiveGuessFailed
     }
 
     let value = (wrappedValue as! [String: Any])["primitive"]!

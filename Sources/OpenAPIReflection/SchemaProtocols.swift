@@ -7,6 +7,7 @@
 
 import Foundation
 import OpenAPIKit
+import Sampleable
 
 /// Anything conforming to `OpenAPIEncodedSchemaType` can provide an
 /// OpenAPI schema representing itself but it may need an Encoder
