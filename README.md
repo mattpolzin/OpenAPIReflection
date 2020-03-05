@@ -1,3 +1,7 @@
+# OpenAPI support
+
+See parent library at https://github.com/mattpolzin/OpenAPIKit
+
 # OpenAPIReflection
 
 A subset of supported Swift types require a `JSONEncoder` either to make an educated guess at the `JSONSchema` for the type or in order to turn arbitrary types into `AnyCodable` for use as schema examples or allowed values.
