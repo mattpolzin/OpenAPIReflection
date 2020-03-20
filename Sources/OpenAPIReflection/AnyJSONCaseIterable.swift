@@ -39,12 +39,14 @@ public extension AnyJSONCaseIterable {
     }
 }
 
-public extension AnyJSONCaseIterable where Self: CaseIterable {
+public extension AnyJSONCaseIterable where Self: CaseIterable, Self: Codable {
     static func caseIterableOpenAPISchemaGuess(using encoder: JSONEncoder) throws -> JSONSchema {
         guard let first = allCases.first else {
             throw OpenAPI.EncodableError.exampleNotCodable
         }
-        return try OpenAPIReflection.genericOpenAPISchemaGuess(for: first, using: encoder)
+        let itemSchema = try OpenAPIReflection.nestedGenericOpenAPISchemaGuess(for: first, using: encoder)
+
+        return itemSchema.with(allowedValues: allCases.map { AnyCodable($0) })
     }
 }
 

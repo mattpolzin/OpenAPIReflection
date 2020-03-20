@@ -23,11 +23,6 @@ extension Sampleable where Self: Encodable {
 }
 
 public func genericOpenAPISchemaGuess<T>(for value: T, using encoder: JSONEncoder) throws -> JSONSchema {
-
-    if let schema = try openAPISchemaGuess(for: value, using: encoder) {
-        return schema
-    }
-
     let mirror = Mirror(reflecting: value)
     let properties: [(String, JSONSchema)] = try mirror.children.compactMap { child in
 
@@ -43,7 +38,7 @@ public func genericOpenAPISchemaGuess<T>(for value: T, using encoder: JSONEncode
 
         // try to snag an OpenAPI Node
         let openAPINode: JSONSchema = try openAPISchemaGuess(for: child.value, using: encoder)
-            ?? genericOpenAPISchemaGuess(for: child.value, using: encoder)
+            ?? nestedGenericOpenAPISchemaGuess(for: child.value, using: encoder)
 
         // put it all together
         let newNode: JSONSchema
@@ -68,6 +63,16 @@ public func genericOpenAPISchemaGuess<T>(for value: T, using encoder: JSONEncode
     return .object(.init(format: .generic,
                          required: true),
                    .init(properties: propertiesDict))
+}
+
+/// Same as genericOpenAPISchemaGuess() except it checks if there's an easy
+/// way out via an explicit conformance to one of the OpenAPISchema protocols.
+internal func nestedGenericOpenAPISchemaGuess<T>(for value: T, using encoder: JSONEncoder) throws -> JSONSchema {
+    if let schema = try openAPISchemaGuess(for: value, using: encoder) {
+        return schema
+    }
+
+    return try genericOpenAPISchemaGuess(for: value, using: encoder)
 }
 
 internal func reencodedSchemaGuess<T: Encodable>(for value: T, using encoder: JSONEncoder) throws -> JSONSchema? {

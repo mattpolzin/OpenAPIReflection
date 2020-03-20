@@ -242,7 +242,14 @@ final class GenericOpenAPISchemaTests: XCTestCase {
     }
 
     func test_enumDirectly() throws {
-        XCTAssertEqual(try AllowedValues.StringEnum.caseIterableOpenAPISchemaGuess(using: JSONEncoder()), .string)
+        let schemaGuess = try AllowedValues.StringEnum.caseIterableOpenAPISchemaGuess(using: JSONEncoder())
+        guard case let .string(ctx, _) = schemaGuess else {
+            XCTFail("Expected string.")
+            return
+        }
+
+        XCTAssertEqual(ctx.allowedValues?.first?.value as? AllowedValues.StringEnum, .hello)
+        XCTAssertEqual(ctx.allowedValues?.last?.value as? AllowedValues.StringEnum, .world)
 
         XCTAssertThrowsError(try CaselessEnum.caseIterableOpenAPISchemaGuess(using: JSONEncoder())) { err in
             XCTAssertEqual(err as? OpenAPI.EncodableError, .exampleNotCodable)
@@ -255,6 +262,19 @@ final class GenericOpenAPISchemaTests: XCTestCase {
             .object(
                 properties: [
                     "sampleable": .string
+                ]
+            )
+        )
+    }
+
+    func test_customCallsGeneric() throws {
+        let schema = try CustomImplementationCallsGeneric.openAPISchema(using: JSONEncoder())
+
+        XCTAssertEqual(
+            schema,
+            .object(
+                properties: [
+                    "stringValue": .string
                 ]
             )
         )
@@ -413,7 +433,7 @@ extension GenericOpenAPISchemaTests {
         static let sample: EmptyObjectType = .init(empty: .init())
     }
 
-    enum CaselessEnum: RawRepresentable, CaseIterable, AnyJSONCaseIterable {
+    enum CaselessEnum: RawRepresentable, Codable, CaseIterable, AnyJSONCaseIterable {
         init?(rawValue: String) {
             return nil
         }
@@ -436,6 +456,17 @@ extension GenericOpenAPISchemaTests {
             case two
 
             static let sample: Self = .one
+        }
+    }
+
+    struct CustomImplementationCallsGeneric: Codable, Sampleable, OpenAPIEncodedSchemaType {
+
+        let stringValue: String
+
+        static let sample: Self = .init(stringValue: "hello")
+
+        static func openAPISchema(using encoder: JSONEncoder) throws -> JSONSchema {
+            try OpenAPIReflection.genericOpenAPISchemaGuess(for: sample, using: encoder)
         }
     }
 
