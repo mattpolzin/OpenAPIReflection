@@ -11,17 +11,17 @@ import OpenAPIKit
 
 extension Sampleable where Self: Encodable {
     public static func genericOpenAPISchemaGuess(using encoder: JSONEncoder) throws -> JSONSchema {
-        // short circuit for dates
-        if let dateType = self as? Date.Type,
-            let node = try dateType.dateOpenAPISchemaGuess(using: encoder) ?? reencodedSchemaGuess(for: Self.sample, using: encoder) {
-            return node
-        }
-
         return try OpenAPIReflection.genericOpenAPISchemaGuess(for: Self.sample, using: encoder)
     }
 }
 
 public func genericOpenAPISchemaGuess<T>(for value: T, using encoder: JSONEncoder) throws -> JSONSchema {
+    // short circuit for dates
+    if let date = value as? Date,
+        let node = try type(of: date).dateOpenAPISchemaGuess(using: encoder) ?? reencodedSchemaGuess(for: date, using: encoder) {
+        return node
+    }
+
     let mirror = Mirror(reflecting: value)
     let properties: [(String, JSONSchema)] = try mirror.children.compactMap { child in
 
