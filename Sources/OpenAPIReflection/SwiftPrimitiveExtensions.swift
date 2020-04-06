@@ -7,7 +7,6 @@
 
 import Foundation
 import OpenAPIKit
-import AnyCodable
 
 extension Optional: AnyRawRepresentable where Wrapped: AnyRawRepresentable {
     public static var rawValueType: Any.Type { Wrapped.rawValueType }
@@ -44,7 +43,7 @@ extension Dictionary: RawOpenAPISchemaType where Key: RawRepresentable, Key.RawV
         return .object(.init(format: .generic,
                              required: true),
                        .init(properties: [:],
-                             additionalProperties: .init(try Value.openAPISchema())))
+                             additionalProperties: .init(Value.openAPISchema)))
     }
 }
 

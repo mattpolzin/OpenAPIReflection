@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import AnyCodable
 import Sampleable
 import OpenAPIKit
 
@@ -93,7 +92,7 @@ internal func openAPISchemaGuess(for type: Any.Type, using encoder: JSONEncoder)
     let nodeGuess: JSONSchema? = try {
         switch type {
         case let valType as OpenAPISchemaType.Type:
-            return try valType.openAPISchema()
+            return valType.openAPISchema
 
         case let valType as RawOpenAPISchemaType.Type:
             return try valType.rawOpenAPISchema()

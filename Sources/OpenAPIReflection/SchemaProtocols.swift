@@ -18,7 +18,9 @@ public protocol OpenAPIEncodedSchemaType {
 
 extension OpenAPIEncodedSchemaType where Self: Sampleable, Self: Encodable {
     public static func openAPINodeWithExample(using encoder: JSONEncoder = JSONEncoder()) throws -> JSONSchema {
-        return try openAPISchema(using: encoder).with(example: Self.successSample ?? Self.sample, using: encoder)
+        let exampleData = try encoder.encode(Self.successSample ?? Self.sample)
+        let example = try JSONDecoder().decode(AnyCodable.self, from: exampleData)
+        return try openAPISchema(using: encoder).with(example: example)
     }
 }
 
@@ -34,7 +36,7 @@ public protocol RawOpenAPISchemaType {
 
 extension RawOpenAPISchemaType where Self: RawRepresentable, RawValue: OpenAPISchemaType {
     public static func rawOpenAPISchema() throws -> JSONSchema {
-        return try RawValue.openAPISchema()
+        return RawValue.openAPISchema
     }
 }
 
