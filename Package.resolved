@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/mattpolzin/OpenAPIKit.git",
         "state": {
           "branch": null,
-          "revision": "ff8b447549499b80aed8b73b1e1a0f54f090991c",
-          "version": "0.28.0"
+          "revision": "abbfc112ebef55e4eff1bba04340289aa1b6ba09",
+          "version": "0.29.0"
         }
       },
       {

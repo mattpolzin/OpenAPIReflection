@@ -11,7 +11,7 @@ let package = Package(
             targets: ["OpenAPIReflection"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/mattpolzin/OpenAPIKit.git", .upToNextMinor(from: "0.28.0")),
+        .package(url: "https://github.com/mattpolzin/OpenAPIKit.git", .upToNextMinor(from: "0.29.0")),
         .package(url: "https://github.com/mattpolzin/Sampleable.git", .upToNextMajor(from: "2.1.0"))
     ],
     targets: [
