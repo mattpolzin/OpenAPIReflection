@@ -1,5 +1,4 @@
-// swift-tools-version:5.1
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version:5.2
 
 import PackageDescription
 
@@ -11,7 +10,7 @@ let package = Package(
             targets: ["OpenAPIReflection"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/mattpolzin/OpenAPIKit.git", .upToNextMinor(from: "0.29.0")),
+        .package(url: "https://github.com/mattpolzin/OpenAPIKit.git", .upToNextMinor(from: "0.30.0")),
         .package(url: "https://github.com/mattpolzin/Sampleable.git", .upToNextMajor(from: "2.1.0"))
     ],
     targets: [
