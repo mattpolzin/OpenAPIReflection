@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  OpenAPI+Errors.swift
 //  
 //
 //  Created by Mathew Polzin on 4/21/20.

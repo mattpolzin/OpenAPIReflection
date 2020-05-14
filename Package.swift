@@ -10,8 +10,8 @@ let package = Package(
             targets: ["OpenAPIReflection"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/mattpolzin/OpenAPIKit.git", .upToNextMinor(from: "0.30.0")),
-        .package(url: "https://github.com/mattpolzin/Sampleable.git", .upToNextMajor(from: "2.1.0"))
+        .package(url: "https://github.com/mattpolzin/OpenAPIKit", from: "1.0.0"),
+        .package(url: "https://github.com/mattpolzin/Sampleable", from: "2.1.0")
     ],
     targets: [
         .target(

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SchemaProtocols.swift
 //  
 //
 //  Created by Mathew Polzin on 3/4/20.

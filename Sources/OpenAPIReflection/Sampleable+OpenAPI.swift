@@ -59,9 +59,7 @@ public func genericOpenAPISchemaGuess<T>(for value: T, using encoder: JSONEncode
     // fail to the newer value arbitrarily
     let propertiesDict = Dictionary(properties) { _, value2 in value2 }
 
-    return .object(.init(format: .generic,
-                         required: true),
-                   .init(properties: propertiesDict))
+    return .object(required: true, properties: propertiesDict)
 }
 
 /// Same as genericOpenAPISchemaGuess() except it checks if there's an easy
