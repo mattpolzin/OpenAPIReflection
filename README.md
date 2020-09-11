@@ -4,7 +4,32 @@ See parent library at https://github.com/mattpolzin/OpenAPIKit
 
 # OpenAPIReflection
 
-A subset of supported Swift types require a `JSONEncoder` either to make an educated guess at the `JSONSchema` for the type or in order to turn arbitrary types into `AnyCodable` for use as schema examples or allowed values.
+This library offers extended support for creating OpenAPI types from Swift types. Specifically, this library covers the subset of Swift types that require a `JSONEncoder` to either make an educated guess at the `JSONSchema` for the type or to turn arbitrary types into `AnyCodable` for use as schema examples or allowed values.
+
+## Dates
+
+Dates will create different OpenAPI representations depending on the encoding settings of the `JSONEncoder` passed into the schema construction method.
+
+```swift
+// encoder1 has `.iso8601` `dateEncodingStrategy`
+let schema = Date().dateOpenAPISchemaGuess(using: encoder1)
+// ^ equivalent to:
+let sameSchema = JSONSchema.string(
+  format: .dateTime
+)
+
+// encoder2 has `.secondsSince1970` `dateEncodingStrategy`
+let schema2 = Date().dateOpenAPISchemaGuess(using: encoder2)
+// ^ equivalent to:
+let sameSchema = JSONSchema.number(
+  format: .double
+)
+```
+
+It will even try to take a guess given a custom formatter date decoding
+strategy.
+
+## Enums
 
 Swift enums produce schemas with **allowed values** specified as long as they conform to `CaseIterable`, `Encodable`, and `AnyJSONCaseIterable` (the last of which is free given the former two).
 ```swift
@@ -19,6 +44,8 @@ let sameSchema = JSONSchema.string(
   allowedValues: "one", "two"
 )
 ```
+
+## Structs
 
 Swift structs produce a best-guess schema as long as they conform to `Sampleable` and `Encodable`
 ```swift
@@ -43,3 +70,7 @@ let sameSchema = JSONSchema.object(
   ]
 )
 ```
+
+## Custom OpenAPI type representations
+
+You can take the protocols offered by this library and OpenAPIKit and create arbitrarily complex OpenAPI types from your own Swift types. Right now, the only form of documentation on this subject is the fully realized example over in the [JSONAPI+OpenAPI](https://github.com/mattpolzin/JSONAPI-OpenAPI) library. Just look for conformances to `OpenAPISchemaType` and `OpenAPIEncodedSchemaType`.

@@ -2,48 +2,21 @@
   "object": {
     "pins": [
       {
-        "package": "FineJSON",
-        "repositoryURL": "https://github.com/omochi/FineJSON.git",
-        "state": {
-          "branch": null,
-          "revision": "05101709243cb66d80c92e645210a3b80cf4e17f",
-          "version": "1.14.0"
-        }
-      },
-      {
         "package": "OpenAPIKit",
-        "repositoryURL": "https://github.com/mattpolzin/OpenAPIKit",
+        "repositoryURL": "https://github.com/mattpolzin/OpenAPIKit.git",
         "state": {
           "branch": null,
-          "revision": "732251ae2eb1965c9323ae4f8024df908979b7cf",
-          "version": "1.0.1"
-        }
-      },
-      {
-        "package": "RichJSONParser",
-        "repositoryURL": "https://github.com/omochi/RichJSONParser.git",
-        "state": {
-          "branch": null,
-          "revision": "263e2ecfe88d0500fa99e4cbc8c948529d335534",
-          "version": "3.0.0"
+          "revision": "d7a08cb788e77e7a0d9ccb4dad93992a4eaeb4d1",
+          "version": "2.0.0-alpha.4"
         }
       },
       {
         "package": "Sampleable",
-        "repositoryURL": "https://github.com/mattpolzin/Sampleable",
+        "repositoryURL": "https://github.com/mattpolzin/Sampleable.git",
         "state": {
           "branch": null,
           "revision": "df44bf1a860481109dcf455e3c6daf0a0f1bc259",
           "version": "2.1.0"
-        }
-      },
-      {
-        "package": "Yams",
-        "repositoryURL": "https://github.com/jpsim/Yams.git",
-        "state": {
-          "branch": null,
-          "revision": "81a65c4069c28011ee432f2858ba0de49b086677",
-          "version": "3.0.1"
         }
       }
     ]
