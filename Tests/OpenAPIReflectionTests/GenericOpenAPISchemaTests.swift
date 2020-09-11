@@ -11,15 +11,6 @@ import OpenAPIReflection
 import Sampleable
 
 final class GenericOpenAPISchemaTests: XCTestCase {
-//    func test_failsAsUnknown() {
-//        XCTAssertThrowsError(try FailsAsUnknown.genericOpenAPINode(using: JSONEncoder())) { error in
-//            guard let err = error as? OpenAPITypeError,
-//                case .unknownNodeType = err else {
-//                XCTFail("Expected unknown node type error")
-//                return
-//            }
-//        }
-//    }
 
     func test_emptyObject() throws {
         let node = try EmptyObjectType.genericOpenAPISchemaGuess(using: JSONEncoder())

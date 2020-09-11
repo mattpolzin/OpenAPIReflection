@@ -32,26 +32,44 @@ extension Optional: DateOpenAPISchemaType where Wrapped: DateOpenAPISchemaType {
 
 extension Array: OpenAPIEncodedSchemaType where Element: OpenAPIEncodedSchemaType {
     public static func openAPISchema(using encoder: JSONEncoder) throws -> JSONSchema {
-        return .array(.init(format: .generic,
-                            required: true),
-                      .init(items: try Element.openAPISchema(using: encoder)))
+        return .array(
+            .init(
+                format: .generic,
+                required: true
+            ),
+            .init(
+                items: try Element.openAPISchema(using: encoder)
+            )
+        )
     }
 }
 
 extension Dictionary: RawOpenAPISchemaType where Key: RawRepresentable, Key.RawValue == String, Value: OpenAPISchemaType {
     static public func rawOpenAPISchema() throws -> JSONSchema {
-        return .object(.init(format: .generic,
-                             required: true),
-                       .init(properties: [:],
-                             additionalProperties: .init(Value.openAPISchema)))
+        return .object(
+            .init(
+                format: .generic,
+                required: true
+            ),
+            .init(
+                properties: [:],
+                additionalProperties: .init(Value.openAPISchema)
+            )
+        )
     }
 }
 
 extension Dictionary: OpenAPIEncodedSchemaType where Key == String, Value: OpenAPIEncodedSchemaType {
     public static func openAPISchema(using encoder: JSONEncoder) throws -> JSONSchema {
-        return .object(.init(format: .generic,
-                             required: true),
-                       .init(properties: [:],
-                             additionalProperties: .init(try Value.openAPISchema(using: encoder))))
+        return .object(
+            .init(
+                format: .generic,
+                required: true
+            ),
+            .init(
+                properties: [:],
+                additionalProperties: .init(try Value.openAPISchema(using: encoder))
+            )
+        )
     }
 }

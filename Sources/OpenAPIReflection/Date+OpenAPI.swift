@@ -20,22 +20,16 @@ extension Date: DateOpenAPISchemaType {
 
 		case .secondsSince1970,
 			 .millisecondsSince1970:
-			return .number(.init(format: .double,
-								 required: true),
-						   .init())
+			return .number(format: .double)
 
 		case .iso8601:
-			return .string(.init(format: .dateTime,
-								 required: true),
-						   .init())
+			return .string(format: .dateTime)
 
 		case .formatted(let formatter):
 			let hasTime = formatter.timeStyle != .none
 			let format: JSONTypeFormat.StringFormat = hasTime ? .dateTime : .date
 
-			return .string(.init(format: format,
-								 required: true),
-						   .init())
+			return .string(format: format)
 
         @unknown default:
             return nil
@@ -46,7 +40,7 @@ extension Date: DateOpenAPISchemaType {
 extension Date: OpenAPIEncodedSchemaType {
     public static func openAPISchema(using encoder: JSONEncoder) throws -> JSONSchema {
         guard let dateSchema: JSONSchema = try openAPISchemaGuess(for: Date(), using: encoder) else {
-            throw OpenAPI.TypeError.unknownNodeType(type(of: self))
+            throw OpenAPI.TypeError.unknownSchemaType(type(of: self))
         }
 
         return dateSchema

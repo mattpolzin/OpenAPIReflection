@@ -10,15 +10,15 @@ import OpenAPIKit
 
 extension OpenAPI {
     public enum TypeError: Swift.Error, CustomDebugStringConvertible {
-        case invalidNode
-        case unknownNodeType(Any.Type)
+        case invalidSchema
+        case unknownSchemaType(Any.Type)
 
         public var debugDescription: String {
             switch self {
-            case .invalidNode:
-                return "Invalid Node"
-            case .unknownNodeType(let type):
-                return "Could not determine OpenAPI node type of \(String(describing: type))"
+            case .invalidSchema:
+                return "Invalid Schema"
+            case .unknownSchemaType(let type):
+                return "Could not determine OpenAPI schema type of \(String(describing: type))"
             }
         }
     }

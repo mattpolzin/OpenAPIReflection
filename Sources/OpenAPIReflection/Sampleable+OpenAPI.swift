@@ -18,7 +18,10 @@ extension Sampleable where Self: Encodable {
 public func genericOpenAPISchemaGuess<T>(for value: T, using encoder: JSONEncoder) throws -> JSONSchema {
     // short circuit for dates
     if let date = value as? Date,
-        let node = try type(of: date).dateOpenAPISchemaGuess(using: encoder) ?? reencodedSchemaGuess(for: date, using: encoder) {
+        let node = try type(of: date)
+            .dateOpenAPISchemaGuess(using: encoder)
+            ?? reencodedSchemaGuess(for: date, using: encoder) {
+
         return node
     }
 
@@ -35,7 +38,7 @@ public func genericOpenAPISchemaGuess<T>(for value: T, using encoder: JSONEncode
             }
         }()
 
-        // try to snag an OpenAPI Node
+        // try to snag an OpenAPI Schema
         let openAPINode: JSONSchema = try openAPISchemaGuess(for: child.value, using: encoder)
             ?? nestedGenericOpenAPISchemaGuess(for: child.value, using: encoder)
 
@@ -51,7 +54,7 @@ public func genericOpenAPISchemaGuess<T>(for value: T, using encoder: JSONEncode
     }
 
     if properties.count != mirror.children.count {
-        throw OpenAPI.TypeError.unknownNodeType(type(of: value))
+        throw OpenAPI.TypeError.unknownSchemaType(type(of: value))
     }
 
     // There should not be any duplication of keys since these are
@@ -137,28 +140,23 @@ internal func openAPISchemaGuess(for value: Any, using encoder: JSONEncoder) thr
     let primitiveGuess: JSONSchema? = try {
         switch value {
         case is String:
-            return .string(.init(format: .generic,
-                                 required: true),
-                           .init())
+            return .string
 
         case is Int:
-            return .integer(.init(format: .generic,
-                                  required: true),
-                            .init())
+            return .integer
 
         case is Double:
-            return .number(.init(format: .double,
-                                 required: true),
-                           .init())
+            return .number(
+                format: .double
+            )
 
         case is Bool:
-            return .boolean(.init(format: .generic,
-                                  required: true))
+            return .boolean
 
         case is Data:
-            return .string(.init(format: .binary,
-                                 required: true),
-                           .init())
+            return .string(
+                format: .binary
+            )
 
         case is DateOpenAPISchemaType:
             // we don't know what Date will end up looking like without

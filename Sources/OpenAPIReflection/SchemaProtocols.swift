@@ -17,7 +17,7 @@ public protocol OpenAPIEncodedSchemaType {
 }
 
 extension OpenAPIEncodedSchemaType where Self: Sampleable, Self: Encodable {
-    public static func openAPINodeWithExample(using encoder: JSONEncoder = JSONEncoder()) throws -> JSONSchema {
+    public static func openAPISchemaWithExample(using encoder: JSONEncoder = JSONEncoder()) throws -> JSONSchema {
         let exampleData = try encoder.encode(Self.successSample ?? Self.sample)
         let example = try JSONDecoder().decode(AnyCodable.self, from: exampleData)
         return try openAPISchema(using: encoder).with(example: example)
