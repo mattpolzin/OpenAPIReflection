@@ -412,7 +412,7 @@ extension GenericOpenAPISchemaTests {
                 self.val = val
             }
 
-            init?(rawValue: Self.RawValue) {
+            init?(rawValue: String) {
                 self.val = rawValue
             }
         }
