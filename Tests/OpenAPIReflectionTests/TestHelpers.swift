@@ -56,7 +56,7 @@ func assertJSONEquivalent(_ str1: String?, _ str2: String?, file: StaticString =
     XCTAssertEqual(
         str1,
         str2,
-        file: file,
+        file: (file),
         line: line
     )
 }
