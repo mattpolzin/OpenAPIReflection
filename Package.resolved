@@ -2,30 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "FineJSON",
-        "repositoryURL": "https://github.com/omochi/FineJSON.git",
-        "state": {
-          "branch": null,
-          "revision": "05101709243cb66d80c92e645210a3b80cf4e17f",
-          "version": "1.14.0"
-        }
-      },
-      {
         "package": "OpenAPIKit",
         "repositoryURL": "https://github.com/mattpolzin/OpenAPIKit.git",
         "state": {
           "branch": null,
-          "revision": "d7a08cb788e77e7a0d9ccb4dad93992a4eaeb4d1",
-          "version": "2.0.0-alpha.4"
-        }
-      },
-      {
-        "package": "RichJSONParser",
-        "repositoryURL": "https://github.com/omochi/RichJSONParser.git",
-        "state": {
-          "branch": null,
-          "revision": "263e2ecfe88d0500fa99e4cbc8c948529d335534",
-          "version": "3.0.0"
+          "revision": "7170489fd66b8ede7eb89b99a56e1c56ccf8ca8e",
+          "version": "2.0.0-rc.1"
         }
       },
       {
@@ -42,8 +24,8 @@
         "repositoryURL": "https://github.com/jpsim/Yams.git",
         "state": {
           "branch": null,
-          "revision": "81a65c4069c28011ee432f2858ba0de49b086677",
-          "version": "3.0.1"
+          "revision": "88caa2e6fffdbef2e91c2022d038576062042907",
+          "version": "4.0.0"
         }
       }
     ]
