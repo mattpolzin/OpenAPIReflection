@@ -7,7 +7,7 @@
 
 import Foundation
 import Sampleable
-import OpenAPIKit
+import OpenAPIKit30
 
 extension Sampleable where Self: Encodable {
     public static func genericOpenAPISchemaGuess(using encoder: JSONEncoder) throws -> JSONSchema {

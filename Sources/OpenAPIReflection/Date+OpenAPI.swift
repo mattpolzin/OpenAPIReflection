@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import OpenAPIKit
+import OpenAPIKit30
 
 extension Date: DateOpenAPISchemaType {
 	public static func dateOpenAPISchemaGuess(using encoder: JSONEncoder) -> JSONSchema? {

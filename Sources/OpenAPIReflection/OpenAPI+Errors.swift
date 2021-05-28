@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import OpenAPIKit
+import OpenAPIKit30
 
 extension OpenAPI {
     public enum TypeError: Swift.Error, CustomDebugStringConvertible {

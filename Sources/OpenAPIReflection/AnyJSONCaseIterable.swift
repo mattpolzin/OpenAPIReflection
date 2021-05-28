@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import OpenAPIKit
+import OpenAPIKit30
 
 public protocol AnyRawRepresentable {
     /// The `RawValue` type of this type.

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import OpenAPIKit
+import OpenAPIKit30
 import OpenAPIReflection
 
 class AnyJSONCaseIterableTests: XCTestCase {

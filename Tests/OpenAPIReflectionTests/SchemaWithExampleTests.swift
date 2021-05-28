@@ -7,7 +7,7 @@
 
 import XCTest
 import Foundation
-import OpenAPIKit
+import OpenAPIKit30
 import OpenAPIReflection
 import Sampleable
 
