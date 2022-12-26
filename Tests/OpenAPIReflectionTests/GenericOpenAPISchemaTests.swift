@@ -167,10 +167,11 @@ final class GenericOpenAPISchemaTests: XCTestCase {
 
     func test_enumTypes() throws {
         let node = try EnumTypes.genericOpenAPISchemaGuess(using: JSONEncoder())
+        let schema = node.value
 
         XCTAssertEqual(node.jsonTypeFormat, .object(.generic))
 
-        guard case .object(_, let ctx) = node else {
+        guard case .object(_, let ctx) = schema else {
             XCTFail("Expected object")
             return
         }
@@ -187,13 +188,14 @@ final class GenericOpenAPISchemaTests: XCTestCase {
 
     func test_allowedValues() throws {
         let node = try AllowedValues.genericOpenAPISchemaGuess(using: JSONEncoder())
+        let schema = node.value
 
-        guard case let .object(_, objCtx) = node else {
+        guard case let .object(_, objCtx) = schema else {
             XCTFail("Expected object")
             return
         }
 
-        guard case let .string(ctx2, _) = objCtx.properties["stringEnum"] else {
+        guard case let .string(ctx2, _) = objCtx.properties["stringEnum"]?.value else {
             XCTFail("Expected stringEnum property to be a .string")
             return
         }
@@ -202,7 +204,7 @@ final class GenericOpenAPISchemaTests: XCTestCase {
         XCTAssert(ctx2.allowedValues?.contains("hello") ?? false)
         XCTAssert(ctx2.allowedValues?.contains("world") ?? false)
 
-        guard case let .string(ctx3, _) = objCtx.properties["optionalStringEnum"] else {
+        guard case let .string(ctx3, _) = objCtx.properties["optionalStringEnum"]?.value else {
             XCTFail("Expected optionalStringEnum property to be a .string")
             return
         }
@@ -212,7 +214,7 @@ final class GenericOpenAPISchemaTests: XCTestCase {
         XCTAssert(ctx3.allowedValues?.contains("world") ?? false)
         XCTAssertFalse(ctx3.required)
 
-        guard case let .string(ctx4, _) = objCtx.properties["stringStruct"] else {
+        guard case let .string(ctx4, _) = objCtx.properties["stringStruct"]?.value else {
             XCTFail("Expected stringStruct property to be a .string")
             return
         }
@@ -221,7 +223,7 @@ final class GenericOpenAPISchemaTests: XCTestCase {
         XCTAssert(ctx4.allowedValues?.contains("hi") ?? false)
         XCTAssert(ctx4.allowedValues?.contains("there") ?? false)
 
-        guard case let .string(ctx5, _) = objCtx.properties["optionalStringStruct"] else {
+        guard case let .string(ctx5, _) = objCtx.properties["optionalStringStruct"]?.value else {
             XCTFail("Expected optionalStringStruct property to be a .string")
             return
         }
@@ -234,7 +236,7 @@ final class GenericOpenAPISchemaTests: XCTestCase {
 
     func test_enumDirectly() throws {
         let schemaGuess = try AllowedValues.StringEnum.caseIterableOpenAPISchemaGuess(using: JSONEncoder())
-        guard case let .string(ctx, _) = schemaGuess else {
+        guard case let .string(ctx, _) = schemaGuess.value else {
             XCTFail("Expected string.")
             return
         }

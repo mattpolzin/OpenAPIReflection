@@ -11,7 +11,7 @@ let package = Package(
     ],
     dependencies: [
 //        .package(url: "https://github.com/mattpolzin/OpenAPIKit.git", from: "2.0.0"),
-        .package(url: "https://github.com/mattpolzin/OpenAPIKit.git", .revision("64568bf1599cefc275952d2b29c780d52a13b4f2")),
+        .package(url: "https://github.com/mattpolzin/OpenAPIKit.git", .revision("d96f819964a665438c15134465d334d4d3446034")),
         .package(url: "https://github.com/mattpolzin/Sampleable.git", from: "2.1.0")
     ],
     targets: [

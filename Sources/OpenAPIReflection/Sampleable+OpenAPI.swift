@@ -60,7 +60,7 @@ public func genericOpenAPISchemaGuess<T>(for value: T, using encoder: JSONEncode
     // There should not be any duplication of keys since these are
     // property names, but rather than risk runtime exception, we just
     // fail to the newer value arbitrarily
-    let propertiesDict = Dictionary(properties) { _, value2 in value2 }
+    let propertiesDict = OrderedDictionary(properties) { _, value2 in value2 }
 
     return .object(required: true, properties: propertiesDict)
 }
