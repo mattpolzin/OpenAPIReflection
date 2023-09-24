@@ -8,7 +8,7 @@
 import XCTest
 import Foundation
 import OpenAPIKit30
-import OpenAPIReflection
+import OpenAPIReflection30
 import Sampleable
 
 final class SchemaWithExampleTests: XCTestCase {

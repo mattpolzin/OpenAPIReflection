@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import OpenAPIReflection
+@testable import OpenAPIReflection30
 
 final class GenericOpenAPISchemaInternalTests: XCTestCase {
     func test_reencodedSchemaGuess() throws {

@@ -7,7 +7,7 @@
 
 import XCTest
 import OpenAPIKit30
-import OpenAPIReflection
+import OpenAPIReflection30
 import Sampleable
 
 final class GenericOpenAPISchemaTests: XCTestCase {
@@ -459,7 +459,7 @@ extension GenericOpenAPISchemaTests {
         static let sample: Self = .init(stringValue: "hello")
 
         static func openAPISchema(using encoder: JSONEncoder) throws -> JSONSchema {
-            try OpenAPIReflection.genericOpenAPISchemaGuess(for: sample, using: encoder)
+            try OpenAPIReflection30.genericOpenAPISchemaGuess(for: sample, using: encoder)
         }
     }
 

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import OpenAPIKit30
+import OpenAPIKit
 import OpenAPIReflection
 import Sampleable
 

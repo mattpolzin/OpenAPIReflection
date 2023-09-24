@@ -7,8 +7,8 @@
 
 import XCTest
 import Foundation
-import OpenAPIReflection
 import OpenAPIKit30
+import OpenAPIReflection30
 
 class SwiftPrimitiveTypesTests: XCTestCase {
     func test_OptionalCaseIterableNodeAllCases() {

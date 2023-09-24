@@ -7,7 +7,7 @@
 
 import XCTest
 import OpenAPIKit30
-import OpenAPIReflection
+import OpenAPIReflection30
 
 class AnyJSONCaseIterableTests: XCTestCase {
     func test_CodableToAllCases() {
