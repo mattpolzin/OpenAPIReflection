@@ -24,6 +24,24 @@ public func genericOpenAPISchemaGuess<T>(for value: T, using encoder: JSONEncode
 
         return node
     }
+    // short circuit for optionals
+    if let optional = value as? _Optional {
+        // we don't want to accidentally not take advantage of user-defined support
+        // so we try for a schema guess right off the bat
+        if let schemaGuess = try openAPISchemaGuess(for: type(of: optional), using: encoder) {
+            return schemaGuess
+        }
+
+        // otherwise, we dig into optional by hand to avoid the below code considering .some and .none to be
+        // "children"
+        switch optional.value {
+        case .some(let wrappedValue):
+            return try genericOpenAPISchemaGuess(for: wrappedValue, using: encoder)
+                .optionalSchemaObject()
+        case .none:
+            return .object(required: false)
+        }
+    }
 
     let mirror = Mirror(reflecting: value)
     let properties: [(String, JSONSchema)] = try mirror.children.compactMap { child in
@@ -114,7 +132,6 @@ internal func openAPISchemaGuess(for type: Any.Type, using encoder: JSONEncoder)
             } else {
                 return nil
             }
-
         default:
             return nil
         }
@@ -178,5 +195,16 @@ private struct PrimitiveWrapper<Wrapped: Encodable>: Encodable {
     let primitive: Wrapped
 }
 
-private protocol _Optional {}
-extension Optional: _Optional {}
+private protocol _Optional {
+    static var wrapped: Any.Type { get }
+    var value: Any? { get }
+}
+extension Optional: _Optional {
+    static var wrapped: Any.Type {
+        Wrapped.self
+    }
+
+    var value: Any? {
+        return self
+    }
+}

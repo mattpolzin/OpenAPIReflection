@@ -24,6 +24,7 @@ final class GenericOpenAPISchemaInternalTests: XCTestCase {
         XCTAssertEqual(try openAPISchemaGuess(for: Double.self, using: testEncoder), .number(format: .double))
         XCTAssertEqual(try openAPISchemaGuess(for: Bool.self, using: testEncoder), .boolean)
         XCTAssertEqual(try openAPISchemaGuess(for: TestEnum.self, using: testEncoder), .string)
+        XCTAssertEqual(try openAPISchemaGuess(for: Optional<String>.self, using: testEncoder), .string(required: false))
     }
 
     func test_openAPINodeGuessForValue() {
@@ -33,6 +34,7 @@ final class GenericOpenAPISchemaInternalTests: XCTestCase {
         XCTAssertEqual(try openAPISchemaGuess(for: 11.5, using: testEncoder), .number(format: .double))
         XCTAssertEqual(try openAPISchemaGuess(for: true, using: testEncoder), .boolean)
         XCTAssertEqual(try openAPISchemaGuess(for: TestEnum.one, using: testEncoder), .string)
+        XCTAssertEqual(try openAPISchemaGuess(for: Optional("hello") as Any, using: testEncoder), .string(required: false))
     }
 }
 

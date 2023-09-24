@@ -15,9 +15,10 @@ jobs:
         image:
           - swift:5.8-bionic
           - swift:5.8-focal
+          - swift:5.8-jammy
           - swift:5.8-amazonlinux2
-          - swift:5.9-bionic
           - swift:5.9-focal
+          - swift:5.9-jammy
           - swift:5.9-amazonlinux2
     container: ${{ matrix.image }}
     steps:
@@ -29,7 +30,7 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: Select latest available Xcode
-        uses: maxim-lobanov/setup-xcode@1.0
+        uses: maxim-lobanov/setup-xcode@v1
         with: { 'xcode-version': 'latest' }
       - name: Checkout code
         uses: actions/checkout@v3
