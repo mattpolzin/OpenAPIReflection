@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import OpenAPIKit30
+import OpenAPIKit
 import Sampleable
 
 /// Anything conforming to `OpenAPIEncodedSchemaType` can provide an

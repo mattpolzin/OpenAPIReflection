@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import OpenAPIKit30
+import OpenAPIKit
 
 extension Optional: AnyRawRepresentable where Wrapped: AnyRawRepresentable {
     public static var rawValueType: Any.Type { Wrapped.rawValueType }
