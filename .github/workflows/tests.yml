@@ -13,20 +13,16 @@ jobs:
       fail-fast: false
       matrix:
         image:
-          - swift:5.2-xenial
-          - swift:5.2-bionic
-          - swift:5.2-focal
-          - swift:5.2-centos8
-          - swift:5.2-amazonlinux2
-          - swift:5.3-xenial
-          - swift:5.3-bionic
-          - swift:5.3-focal
-          - swift:5.3-centos8
-          - swift:5.3-amazonlinux2
+          - swift:5.8-bionic
+          - swift:5.8-focal
+          - swift:5.8-amazonlinux2
+          - swift:5.9-bionic
+          - swift:5.9-focal
+          - swift:5.9-amazonlinux2
     container: ${{ matrix.image }}
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Run tests
       run: swift test --enable-test-discovery
   osx:
@@ -36,6 +32,6 @@ jobs:
         uses: maxim-lobanov/setup-xcode@1.0
         with: { 'xcode-version': 'latest' }
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Run tests
         run: swift test --enable-test-discovery
