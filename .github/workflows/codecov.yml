@@ -13,3 +13,4 @@ jobs:
     - uses: mattpolzin/swift-codecov-action@0.7.5
       with:
         MINIMUM_COVERAGE: 85
+        INCLUDE_TESTS: 'true'
