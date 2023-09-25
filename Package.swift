@@ -8,6 +8,9 @@ let package = Package(
         .library(
             name: "OpenAPIReflection",
             targets: ["OpenAPIReflection"]),
+        .library(
+            name: "OpenAPIReflection30",
+            targets: ["OpenAPIReflection30"]),
     ],
     dependencies: [
         .package(url: "https://github.com/mattpolzin/OpenAPIKit.git", .branch("release/3_0")),
