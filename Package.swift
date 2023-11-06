@@ -13,7 +13,7 @@ let package = Package(
             targets: ["OpenAPIReflection30"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/mattpolzin/OpenAPIKit.git", .branch("release/3_0")),
+        .package(url: "https://github.com/mattpolzin/OpenAPIKit.git", from: "3.0.0"),
         .package(url: "https://github.com/mattpolzin/Sampleable.git", from: "2.1.0")
     ],
     targets: [
