@@ -7,8 +7,8 @@
 
 import XCTest
 import Foundation
-import OpenAPIKit
-import OpenAPIReflection
+import OpenAPIKit30
+import OpenAPIReflection30
 import Sampleable
 
 final class SchemaWithExampleTests: XCTestCase {
@@ -45,13 +45,13 @@ final class SchemaWithExampleTests: XCTestCase {
             expectedSchema.objectContext
         )
 
-        XCTAssertFalse(schemaGuess.examples.isEmpty)
+        XCTAssertNotNil(schemaGuess.example)
 
         // equality checks on AnyCodable are finicky but
         // they compare equally when encoded to data.
         XCTAssertEqual(
-            try testEncoder.encode(schemaGuess.examples),
-            try testEncoder.encode(expectedSchema.examples)
+            try testEncoder.encode(schemaGuess.example),
+            try testEncoder.encode(expectedSchema.example)
         )
     }
 }

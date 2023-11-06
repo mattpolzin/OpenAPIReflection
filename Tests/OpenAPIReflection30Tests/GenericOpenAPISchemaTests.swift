@@ -6,8 +6,8 @@
 //
 
 import XCTest
-import OpenAPIKit
-import OpenAPIReflection
+import OpenAPIKit30
+import OpenAPIReflection30
 import Sampleable
 
 final class GenericOpenAPISchemaTests: XCTestCase {
@@ -36,27 +36,10 @@ final class GenericOpenAPISchemaTests: XCTestCase {
                     "int": .integer,
                     "double": .number(format: .double),
                     "float": .number(format: .float),
-                    "bool": .boolean,
-                    "optionalString": .string(required: false)
+                    "bool": .boolean
                 ]
             )
        )
-    }
-
-    func test_opaqueStruct() throws {
-        // "opaque" in that the `OnlyCodable` type does not itself define an OpenAPI schema and so we must
-        // encode it to have any chance at guessing its structure.
-        let node = try OpaqueStructs.genericOpenAPISchemaGuess(using: JSONEncoder())
-
-        XCTAssertEqual(
-            node,
-            JSONSchema.object(
-                properties: [
-                    "opaque": .object(properties: ["value": .string]),
-                    "optionalOpaque": .object(required: false, properties: ["value": .string])
-                ]
-            )
-        )
     }
 
     func test_dateType() throws {
@@ -300,25 +283,8 @@ extension GenericOpenAPISchemaTests {
         let double: Double
         let float: Float
         let bool: Bool
-        let optionalString: String?
 
-        static let sample: BasicTypes = .init(string: "hello", int: 10, double: 2.3, float: 1.1, bool: true, optionalString: "world")
-    }
-
-    struct OnlyCodable: Codable {
-        let value: String
-    }
-
-    struct OpaqueStructs: Codable, Sampleable {
-        // "opaque" in that the `OnlyCodable` type does not itself define an OpenAPI schema and so we must
-        // encode it to have any chance at guessing its structure.
-        let opaque: OnlyCodable
-        let optionalOpaque: OnlyCodable?
-
-        static let sample: OpaqueStructs = .init(
-            opaque: .init(value: "hello"),
-            optionalOpaque: .init(value: "world")
-        )
+        static let sample: BasicTypes = .init(string: "hello", int: 10, double: 2.3, float: 1.1, bool: true)
     }
 
     struct DateType: Codable, Sampleable {
@@ -493,7 +459,7 @@ extension GenericOpenAPISchemaTests {
         static let sample: Self = .init(stringValue: "hello")
 
         static func openAPISchema(using encoder: JSONEncoder) throws -> JSONSchema {
-            try OpenAPIReflection.genericOpenAPISchemaGuess(for: sample, using: encoder)
+            try OpenAPIReflection30.genericOpenAPISchemaGuess(for: sample, using: encoder)
         }
     }
 

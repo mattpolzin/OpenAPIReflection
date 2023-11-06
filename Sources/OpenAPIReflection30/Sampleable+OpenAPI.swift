@@ -7,11 +7,11 @@
 
 import Foundation
 import Sampleable
-import OpenAPIKit
+import OpenAPIKit30
 
 extension Sampleable where Self: Encodable {
     public static func genericOpenAPISchemaGuess(using encoder: JSONEncoder) throws -> JSONSchema {
-        return try OpenAPIReflection.genericOpenAPISchemaGuess(for: Self.sample, using: encoder)
+        return try OpenAPIReflection30.genericOpenAPISchemaGuess(for: Self.sample, using: encoder)
     }
 }
 
@@ -23,24 +23,6 @@ public func genericOpenAPISchemaGuess<T>(for value: T, using encoder: JSONEncode
             ?? reencodedSchemaGuess(for: date, using: encoder) {
 
         return node
-    }
-    // short circuit for optionals
-    if let optional = value as? _Optional {
-        // we don't want to accidentally not take advantage of user-defined support
-        // so we try for a schema guess right off the bat
-        if let schemaGuess = try openAPISchemaGuess(for: type(of: optional), using: encoder) {
-            return schemaGuess
-        }
-
-        // otherwise, we dig into optional by hand to avoid the below code considering .some and .none to be
-        // "children"
-        switch optional.value {
-        case .some(let wrappedValue):
-            return try genericOpenAPISchemaGuess(for: wrappedValue, using: encoder)
-                .optionalSchemaObject()
-        case .none:
-            return .object(required: false)
-        }
     }
 
     let mirror = Mirror(reflecting: value)
@@ -132,6 +114,7 @@ internal func openAPISchemaGuess(for type: Any.Type, using encoder: JSONEncoder)
             } else {
                 return nil
             }
+
         default:
             return nil
         }
@@ -172,13 +155,13 @@ internal func openAPISchemaGuess(for value: Any, using encoder: JSONEncoder) thr
 
         case is Data:
             return .string(
-                contentEncoding: .binary
+                format: .binary
             )
 
         case is DateOpenAPISchemaType:
             // we don't know what Date will end up looking like without
             // trying it out. Most likely a `.string` or `.number(format: .double)`
-            return try OpenAPIReflection.reencodedSchemaGuess(for: Date(), using: encoder)
+            return try OpenAPIReflection30.reencodedSchemaGuess(for: Date(), using: encoder)
 
         default:
             return nil
@@ -195,16 +178,5 @@ private struct PrimitiveWrapper<Wrapped: Encodable>: Encodable {
     let primitive: Wrapped
 }
 
-private protocol _Optional {
-    static var wrapped: Any.Type { get }
-    var value: Any? { get }
-}
-extension Optional: _Optional {
-    static var wrapped: Any.Type {
-        Wrapped.self
-    }
-
-    var value: Any? {
-        return self
-    }
-}
+private protocol _Optional {}
+extension Optional: _Optional {}
