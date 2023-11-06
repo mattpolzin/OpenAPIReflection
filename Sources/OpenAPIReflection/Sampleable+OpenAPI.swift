@@ -172,7 +172,7 @@ internal func openAPISchemaGuess(for value: Any, using encoder: JSONEncoder) thr
 
         case is Data:
             return .string(
-                format: .binary
+                contentEncoding: .binary
             )
 
         case is DateOpenAPISchemaType:
