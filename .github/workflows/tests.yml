@@ -28,7 +28,8 @@ jobs:
           - swift:6.0-jammy
           - swift:6.0-noble
           - swift:6.0-amazonlinux2
-    container: ${{ matrix.image }}
+    container: 
+      image: ${{ matrix.image }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
