@@ -102,46 +102,50 @@ final class GenericOpenAPISchemaTests: XCTestCase {
         let node3 = try DateType.genericOpenAPISchemaGuess(using: e3)
 
         XCTAssertEqual(node2, node3)
-        XCTAssertEqual(
-            node2,
-            JSONSchema.object(
-                properties: [
-                    "date": .number(format: .double)
-                ]
-            )
-        )
+        #if os(Linux)
+          throw XCTSkip("Not supported on Linux.")
+        #else
+          XCTAssertEqual(
+              node2,
+              JSONSchema.object(
+                  properties: [
+                      "date": .number(format: .double)
+                  ]
+              )
+          )
 
-        let e4 = JSONEncoder()
-        let df1 = DateFormatter()
-        df1.timeStyle = .none
-        e4.dateEncodingStrategy = .formatted(df1)
+          let e4 = JSONEncoder()
+          let df1 = DateFormatter()
+          df1.timeStyle = .none
+          e4.dateEncodingStrategy = .formatted(df1)
 
-        let node4 = try DateType.genericOpenAPISchemaGuess(using: e4)
+          let node4 = try DateType.genericOpenAPISchemaGuess(using: e4)
 
-        XCTAssertEqual(
-            node4,
-            JSONSchema.object(
-                properties: [
-                    "date": .string(format: .date)
-                ]
-            )
-        )
+          XCTAssertEqual(
+              node4,
+              JSONSchema.object(
+                  properties: [
+                      "date": .string(format: .date)
+                  ]
+              )
+          )
 
-        let e5 = JSONEncoder()
-        let df2 = DateFormatter()
-        df2.timeStyle = .full
-        e5.dateEncodingStrategy = .formatted(df2)
+          let e5 = JSONEncoder()
+          let df2 = DateFormatter()
+          df2.timeStyle = .full
+          e5.dateEncodingStrategy = .formatted(df2)
 
-        let node5 = try DateType.genericOpenAPISchemaGuess(using: e5)
+          let node5 = try DateType.genericOpenAPISchemaGuess(using: e5)
 
-        XCTAssertEqual(
-            node5,
-            JSONSchema.object(
-                properties: [
-                    "date": .string(format: .dateTime)
-                ]
-            )
-        )
+          XCTAssertEqual(
+              node5,
+              JSONSchema.object(
+                  properties: [
+                      "date": .string(format: .dateTime)
+                  ]
+              )
+          )
+      #endif
     }
 
     func test_nested() throws {
