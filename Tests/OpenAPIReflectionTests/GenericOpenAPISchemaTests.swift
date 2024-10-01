@@ -102,6 +102,9 @@ final class GenericOpenAPISchemaTests: XCTestCase {
         let node3 = try DateType.genericOpenAPISchemaGuess(using: e3)
 
         XCTAssertEqual(node2, node3)
+        #if canImport(FoundationEssentials) && swift(>=5.10)
+        throw XCTSkip("Not supported for Swift 5.10+ on Linux.")
+        #else
         XCTAssertEqual(
             node2,
             JSONSchema.object(
@@ -142,6 +145,7 @@ final class GenericOpenAPISchemaTests: XCTestCase {
                 ]
             )
         )
+        #endif
     }
 
     func test_nested() throws {

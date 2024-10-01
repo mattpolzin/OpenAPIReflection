@@ -98,7 +98,9 @@ final class GenericOpenAPISchemaTests: XCTestCase {
         let df1 = DateFormatter()
         df1.timeStyle = .none
         e4.dateEncodingStrategy = .formatted(df1)
-
+        #if canImport(FoundationEssentials) && swift(>=5.10)
+        throw XCTSkip("Not supported for Swift 5.10+ on Linux.")
+        #else        
         let node4 = try DateType.genericOpenAPISchemaGuess(using: e4)
 
         XCTAssertEqual(
@@ -125,6 +127,7 @@ final class GenericOpenAPISchemaTests: XCTestCase {
                 ]
             )
         )
+        #endif
     }
 
     func test_nested() throws {

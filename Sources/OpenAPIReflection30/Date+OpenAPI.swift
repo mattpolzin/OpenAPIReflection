@@ -25,11 +25,13 @@ extension Date: DateOpenAPISchemaType {
 		case .iso8601:
 			return .string(format: .dateTime)
 
+	#if !canImport(FoundationEssentials) || swift(<5.10)
 		case .formatted(let formatter):
 			let hasTime = formatter.timeStyle != .none
 			let format: JSONTypeFormat.StringFormat = hasTime ? .dateTime : .date
 
 			return .string(format: format)
+	#endif
 
         @unknown default:
             return nil
