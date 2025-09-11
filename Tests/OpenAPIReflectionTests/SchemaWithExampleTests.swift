@@ -23,12 +23,12 @@ final class SchemaWithExampleTests: XCTestCase {
                 "double": .number(format: .double)
             ]
         ).with(example:
-            [
+            .init([
               "bool" : true,
               "double" : 2.34,
               "int" : 10,
               "string" : "hello"
-            ]
+            ])
         )
 
         XCTAssertNotNil(schemaGuess.jsonType)
