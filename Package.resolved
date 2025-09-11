@@ -1,34 +1,23 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "OpenAPIKit",
-        "repositoryURL": "https://github.com/mattpolzin/OpenAPIKit.git",
-        "state": {
-          "branch": null,
-          "revision": "ae98338a8e660ae547b058ebb69c010e70b64e31",
-          "version": "3.0.0"
-        }
-      },
-      {
-        "package": "Sampleable",
-        "repositoryURL": "https://github.com/mattpolzin/Sampleable.git",
-        "state": {
-          "branch": null,
-          "revision": "df44bf1a860481109dcf455e3c6daf0a0f1bc259",
-          "version": "2.1.0"
-        }
-      },
-      {
-        "package": "Yams",
-        "repositoryURL": "https://github.com/jpsim/Yams.git",
-        "state": {
-          "branch": null,
-          "revision": "0d9ee7ea8c4ebd4a489ad7a73d5c6cad55d6fed3",
-          "version": "5.0.6"
-        }
+  "pins" : [
+    {
+      "identity" : "openapikit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mattpolzin/OpenAPIKit.git",
+      "state" : {
+        "revision" : "eae73235dd6a8fb9177a75da929e8bbd637c1285",
+        "version" : "4.0.1"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "sampleable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mattpolzin/Sampleable.git",
+      "state" : {
+        "revision" : "df44bf1a860481109dcf455e3c6daf0a0f1bc259",
+        "version" : "2.1.0"
+      }
+    }
+  ],
+  "version" : 2
 }
