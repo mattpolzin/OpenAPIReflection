@@ -1,4 +1,4 @@
-[![Swift 5.8+](http://img.shields.io/badge/Swift-5.8+-blue.svg)](https://swift.org)
+[![Swift 6.0+](http://img.shields.io/badge/Swift-5.8+-blue.svg)](https://swift.org)
 
 [![MIT license](http://img.shields.io/badge/license-MIT-lightgrey.svg)](http://opensource.org/licenses/MIT) ![Tests](https://github.com/mattpolzin/OpenAPIReflection/workflows/Tests/badge.svg)
 
@@ -6,7 +6,7 @@
 
 See parent library at https://github.com/mattpolzin/OpenAPIKit.
 
-To generate OpenAPI 3.1.x types, use the `OpenAPIReflection` module. To generate OpenAPI 3.0.x types, use the `OpenAPIReflection30` module.
+To generate OpenAPI 3.1.x/3.2.x types, use the `OpenAPIReflection` module. To generate OpenAPI 3.0.x types, use the `OpenAPIReflection30` module.
 
 # OpenAPIReflection
 

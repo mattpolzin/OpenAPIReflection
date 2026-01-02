@@ -28,7 +28,7 @@ final class SchemaWithExampleTests: XCTestCase {
               "double" : 2.34,
               "int" : 10,
               "string" : "hello"
-            ])
+            ] as [String: AnyCodable])
         )
 
         XCTAssertNotNil(schemaGuess.jsonType)
