@@ -2,8 +2,6 @@
 //  AnyJSONCaseIterable.swift
 //  OpenAPI
 //
-//  Created by Mathew Polzin on 6/22/19.
-//
 
 import Foundation
 import OpenAPIKit30
@@ -38,7 +36,7 @@ public extension AnyJSONCaseIterable {
     }
 }
 
-public extension AnyJSONCaseIterable where Self: CaseIterable, Self: Codable {
+public extension AnyJSONCaseIterable where Self: CaseIterable, Self: Codable, Self: Sendable {
     static func caseIterableOpenAPISchemaGuess(using encoder: JSONEncoder) throws -> JSONSchema {
         guard let first = allCases.first else {
             throw OpenAPI.EncodableError.exampleNotCodable
@@ -68,7 +66,7 @@ fileprivate func allCases<T: Encodable>(from input: [T], using encoder: JSONEnco
     // by AnyCodable, but AnyCodable wants it to actually BE a String
     // upon initialization.
 
-    guard let arrayOfCodables = try JSONSerialization.jsonObject(with: encoder.encode(input), options: []) as? [Any] else {
+    guard let arrayOfCodables = try JSONSerialization.jsonObject(with: encoder.encode(input), options: []) as? [any Sendable] else {
         throw OpenAPI.EncodableError.allCasesArrayNotCodable
     }
     return arrayOfCodables.map(AnyCodable.init)

@@ -1,4 +1,4 @@
-// swift-tools-version:5.8
+// swift-tools-version:6.0
 
 import PackageDescription
 
@@ -17,7 +17,7 @@ let package = Package(
             targets: ["OpenAPIReflection30"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/mattpolzin/OpenAPIKit.git", from: "4.0.0"),
+        .package(url: "https://github.com/mattpolzin/OpenAPIKit.git", from: "5.0.0"),
         .package(url: "https://github.com/mattpolzin/Sampleable.git", from: "2.1.0")
     ],
     targets: [
@@ -33,5 +33,6 @@ let package = Package(
         .testTarget(
             name: "OpenAPIReflectionTests",
             dependencies: ["OpenAPIReflection"]),
-    ]
+    ],
+    swiftLanguageModes: [.v5,.v6]
 )

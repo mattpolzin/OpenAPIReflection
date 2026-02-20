@@ -13,21 +13,17 @@ jobs:
       fail-fast: false
       matrix:
         image:
-          - swift:5.8-focal
-          - swift:5.8-jammy
-          - swift:5.9-focal
-          - swift:5.9-jammy
-          - swift:5.10-focal
-          - swift:5.10-jammy
-          - swift:5.10-noble
           - swift:6.0-focal
           - swift:6.0-jammy
-          - swift:6.0-noble
+          - swift:6.1-jammy
+          - swift:6.1-noble
+          - swift:6.2-jammy
+          - swift:6.2-noble
     container: 
       image: ${{ matrix.image }}
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v5
     - name: Run tests
       run: swift test --enable-test-discovery
   osx:
