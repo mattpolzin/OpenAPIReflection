@@ -56,6 +56,10 @@ class SwiftPrimitiveTypesTests: XCTestCase {
         XCTAssertEqual(try [String: EncodedSchemaStruct].openAPISchema(using: testEncoder), .object(additionalProperties: .b(.string)))
     }
 
+    func test_rawDictSchemaType() {
+        XCTAssertEqual(try [RawRepStringEnum: OpenAPISchemaStruct].rawOpenAPISchema(), .object(additionalProperties: .b(.string)))
+    }
+
     static let localTestEncoder = JSONEncoder()
 }
 
@@ -73,4 +77,8 @@ fileprivate struct EncodedSchemaStruct: OpenAPIEncodedSchemaType {
     static func openAPISchema(using encoder: JSONEncoder) throws -> JSONSchema {
         .string
     }
+}
+
+fileprivate struct OpenAPISchemaStruct: OpenAPISchemaType {
+    static var openAPISchema: JSONSchema { .string }
 }
