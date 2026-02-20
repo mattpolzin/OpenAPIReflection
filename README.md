@@ -1,4 +1,4 @@
-[![Swift 6.0+](http://img.shields.io/badge/Swift-5.8+-blue.svg)](https://swift.org)
+[![Swift 6.0+](http://img.shields.io/badge/Swift-6.0+-blue.svg)](https://swift.org)
 
 [![MIT license](http://img.shields.io/badge/license-MIT-lightgrey.svg)](http://opensource.org/licenses/MIT) ![Tests](https://github.com/mattpolzin/OpenAPIReflection/workflows/Tests/badge.svg)
 
